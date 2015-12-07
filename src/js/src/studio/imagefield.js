@@ -223,10 +223,10 @@ studio.forms.ImageField = studio.forms.Field.extend({
           },
           fields: [
             new studio.forms.TextField('text', {
-              title: 'Text',
+              title: this.params_.text && this.params_.text.text ? this.params_.text.text : 'Text',
             }),
             new studio.forms.AutocompleteTextField('font', {
-              title: 'Font',
+              title: this.params_.text && this.params_.text.font ? this.params_.text.font : 'Font',
               items: studio.forms.ImageField.fontList_
             })
           ]
@@ -259,7 +259,7 @@ studio.forms.ImageField = studio.forms.Field.extend({
               onText: this.params_.trim && this.params_.trim.onText ? this.params_.trim.onText : 'Trim'
             })),
             new studio.forms.RangeField('pad', {
-              title: 'Padding',
+              title: this.params_.trim && this.params_.trim.padding ? this.params_.trim.padding : 'Padding',
               defaultValue: 0,
               min: -0.1,
               max: 0.5, // 1/2 of min(width, height)
