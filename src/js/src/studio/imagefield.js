@@ -74,13 +74,13 @@ studio.forms.ImageField = studio.forms.Field.extend({
     var types;
     if (this.params_.imageOnly) {
       types = [
-        'image', 'Select Image'
+        'image', this.params_.types && this.params_.types.image ? this.params_.types.image : 'Select Image'
       ];
     } else {
       types = [
-        'image', 'Image',
-        'clipart', 'Clipart',
-        'text', 'Text'
+        'image', this.params_.types && this.params_.types.image ? this.params_.types.image : 'Image',
+        'clipart', this.params_.types && this.params_.types.clipart ? this.params_.types.clipart : 'Clipart',
+        'text', this.params_.types && this.params_.types.text ? this.params_.types.text : 'Text'
       ];
     }
 
@@ -249,10 +249,10 @@ studio.forms.ImageField = studio.forms.Field.extend({
           },
           fields: [
             (this.spaceFormTrimField_ = new studio.forms.BooleanField('trim', {
-              title: 'Trim',
+              title: this.params_.trim && this.params_.trim.trim ? this.params_.trim.trim : 'Trim',
               defaultValue: this.params_.defaultValueTrim || false,
-              offText: 'Don\'t Trim',
-              onText: 'Trim'
+              offText: this.params_.trim && this.params_.trim.offText ? this.params_.trim.offText : 'Don\'t Trim',
+              onText: this.params_.trim && this.params_.trim.onText ? this.params_.trim.onText : 'Trim'
             })),
             new studio.forms.RangeField('pad', {
               title: 'Padding',
