@@ -163,8 +163,10 @@ studio.forms.ImageField = studio.forms.Field.extend({
         .addClass('cancel-parent-scroll')
         .appendTo(clipartParamsEl);
 
+      var clipartPath = this.params_.clipart && this.params_.clipart.path ? this.params_.clipart.path : 'res/clipart/';
+
       for (var i = 0; i < studio.forms.ImageField.clipartList_.length; i++) {
-        var clipartSrc = 'res/clipart/' + studio.forms.ImageField.clipartList_[i];
+        var clipartSrc = clipartPath + studio.forms.ImageField.clipartList_[i];
         $('<img>')
           .addClass('form-image-clipart-item')
           .attr('src', clipartSrc)
@@ -177,17 +179,19 @@ studio.forms.ImageField = studio.forms.Field.extend({
           .appendTo(clipartListEl);
       }
 
-      var clipartAttributionEl = $('<div>')
-        .addClass('form-image-clipart-attribution')
-        .html([
-            'For clipart sources, visit ',
-            '<a href="https://github.com/google/material-design-icons">',
-                'Material Design Icons on GitHub',
-            '</a>.<br>',
-            'Additional icons can be found at ',
-            '<a href="http://www.androidicons.com">androidicons.com</a>.'
-          ].join(''))
-        .appendTo(clipartParamsEl);
+      if (!this.params_.clipart || this.params_.clipart.showSource) {
+        var clipartAttributionEl = $('<div>')
+            .addClass('form-image-clipart-attribution')
+            .html([
+              'For clipart sources, visit ',
+              '<a href="https://github.com/google/material-design-icons">',
+              'Material Design Icons on GitHub',
+              '</a>.<br>',
+              'Additional icons can be found at ',
+              '<a href="http://www.androidicons.com">androidicons.com</a>.'
+            ].join(''))
+            .appendTo(clipartParamsEl);
+      }
 
       typeEls.clipart.click(function(evt) {
         me.setValueType_('clipart');
